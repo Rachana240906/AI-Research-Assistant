@@ -53,6 +53,3 @@ Explanation generated using LLM + Wikipedia search
 
 ---
 
-## Author
-Rachana Bonigala
-B.Tech Artificial Intelligence, SVNIT
