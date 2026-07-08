@@ -1,0 +1,739 @@
+/* Import Christian Robertson's 'Roboto Condensed' Font directly from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg-dark: #0b0509;
+    --panel-glass: rgba(26, 12, 21, 0.65);
+    --border-glass: rgba(236, 72, 153, 0.15);
+    --border-focus: rgba(236, 72, 153, 0.4);
+    --text-primary: #fff1f2;
+    --text-secondary: #f472b6;
+    --text-muted: #fda4af;
+    --pink-core: #ec4899;
+    --pink-bright: #f43f5e;
+    --pink-glow: rgba(236, 72, 153, 0.25);
+    
+    /* Dedicated Custom Font Variable mapping */
+    --font-roboto-condensed: 'Roboto Condensed', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Apply Roboto Condensed across all structural blocks, labels, and lists */
+    font-family: var(--font-roboto-condensed);
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 1.5rem 2rem 1.5rem;
+    overflow-x: hidden;
+    position: relative;
+    font-family: var(--font-roboto-condensed);
+}
+
+/* Ambient Animated Blobs */
+.blob-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(236,72,153,0.18) 0%, rgba(244,63,94,0) 70%);
+    filter: blur(60px);
+    border-radius: 50%;
+    animation: floatAround 25s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    top: -10%;
+    left: 15%;
+}
+
+.blob-2 {
+    bottom: 5%;
+    right: 10%;
+    animation-delay: -5s;
+    background: radial-gradient(circle, rgba(219,39,119,0.15) 0%, rgba(0,0,0,0) 70%);
+}
+
+@keyframes floatAround {
+    0% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.15); }
+    100% { transform: translate(-40px, 80px) scale(0.95); }
+}
+
+.app-container {
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    z-index: 2;
+}
+
+/* Hero Centerpiece Typography */
+.hero-wrapper {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.greeting {
+    font-size: 3.75rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 30%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+/* Glassmorphism Input Field Control Component */
+.search-box-container {
+    background: var(--panel-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: 0.75rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-box-container:focus-within {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15), 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+textarea {
+    width: 100%;
+    height: 72px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    padding: 0.5rem 0.75rem;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    font-family: var(--font-roboto-condensed);
+}
+
+textarea::placeholder {
+    color: rgba(253, 164, 175, 0.45);
+}
+
+button {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--pink-core) 0%, #db2777 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    font-family: var(--font-roboto-condensed);
+}
+
+button:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px var(--pink-glow);
+}
+
+/* Suggestion Matrix */
+.suggestions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.suggestion-card {
+    background: rgba(26, 12, 21, 0.4);
+    border: 1px solid rgba(236, 72, 153, 0.08);
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.suggestion-card:hover {
+    background: rgba(236, 72, 153, 0.06);
+    border-color: rgba(236, 72, 153, 0.25);
+    transform: translateY(-2px);
+}
+
+.suggestion-card span {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* Glass Display Outputs */
+.glass-card {
+    background: var(--panel-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: 1.75rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#loadingState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 2.5rem 1.5rem;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(236, 72, 153, 0.1);
+    border-top: 3px solid var(--pink-core);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
+
+.error-card {
+    border-color: rgba(244, 63, 148, 0.3);
+    background: rgba(49, 19, 24, 0.5);
+}
+
+.error-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--pink-bright);
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(236, 72, 153, 0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.card-header h2 {
+    font-size: 1.35rem;
+    color: #fbcfe8;
+}
+
+.card-body {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ffe4e6;
+    white-space: pre-wrap;
+}
+
+.hidden { display: none !important; }
+
+/* Motion Vectors */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-16px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsiveness Settings */
+@media (max-width: 640px) {
+    body { padding-top: 4rem; }
+    .greeting { font-size: 3rem; }
+    .suggestions-grid { grid-template-columns: 1fr; }
+}
+
+/* AI Floating Decorative Vectors */
+.deco-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.deco-item {
+    position: absolute;
+    transition: transform 0.15s ease-out;
+}
+
+.glass-mini-card {
+    background: rgba(30, 15, 25, 0.45);
+    border: 1px solid rgba(236, 72, 153, 0.12);
+    border-radius: 12px;
+    padding: 0.65rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.item-neural {
+    top: 12%;
+    left: 5%;
+    animation: floatSlowly 8s infinite alternate ease-in-out;
+}
+
+.item-sparkle-1 {
+    top: 15%;
+    right: 8%;
+    animation: pulseScale 4s infinite alternate ease-in-out;
+    filter: drop-shadow(0 0 8px var(--pink-glow));
+}
+
+.item-card-graph {
+    top: 50%;
+    left: 4%;
+    width: 140px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    animation: floatSlowly 6s infinite alternate ease-in-out 1s;
+}
+
+.mini-card-header {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    opacity: 0.85;
+}
+
+.item-document {
+    top: 45%;
+    right: 6%;
+    padding: 0.85rem;
+    animation: floatSlowly 7s infinite alternate ease-in-out 0.5s;
+}
+
+.item-sparkle-2 {
+    bottom: 18%;
+    right: 18%;
+    animation: pulseScale 5s infinite alternate ease-in-out 0.8s;
+}
+
+@keyframes floatSlowly {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(12px) rotate(3deg); }
+}
+
+@keyframes pulseScale {
+    0% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    100% { transform: scale(1.12) rotate(8deg); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .deco-container { display: none; }
+}
+
+/* Workspace Interactive Sheet Grid */
+.workspace-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 1.5rem;
+    align-items: flex-start;
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+}
+
+.workspace-sidebar {
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebar-sticky-box {
+    padding: 1.25rem !important;
+}
+
+.sidebar-section-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: rgba(236, 72, 153, 0.12);
+    margin: 1.25rem 0;
+}
+
+.toc-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toc-link {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.35rem 0.5rem;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.toc-link:hover, .toc-link.active {
+    color: white;
+    border-left-color: var(--pink-core);
+    background: rgba(236, 72, 153, 0.04);
+}
+
+.action-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 0.5rem !important;
+    font-size: 0.9rem !important;
+    border-radius: 6px !important;
+    justify-content: center;
+}
+
+.secondary-action {
+    background: rgba(26, 12, 21, 0.4) !important;
+    border: 1px solid var(--border-glass) !important;
+    color: var(--text-muted) !important;
+}
+
+.secondary-action:hover {
+    background: rgba(236, 72, 153, 0.08) !important;
+    color: white !important;
+}
+
+.workspace-main-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.workspace-meta-card {
+    padding: 1.25rem !important;
+}
+
+.tag-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tag-pill {
+    font-size: 0.8rem;
+    background: rgba(236, 72, 153, 0.08);
+    border: 1px solid rgba(236, 72, 153, 0.15);
+    color: var(--text-muted);
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+}
+
+.doc-title {
+    font-size: 1.6rem;
+    color: white;
+}
+
+.insight-highlight-card {
+    border-left: 4px solid var(--pink-core) !important;
+    background: linear-gradient(90deg, rgba(236, 72, 153, 0.05) 0%, rgba(0,0,0,0) 100%);
+    padding: 1.25rem !important;
+}
+
+.insight-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--pink-core);
+    margin-bottom: 0.35rem;
+}
+
+#executiveInsightText {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #fecdd3;
+}
+
+.body-header {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(236, 72, 153, 0.1);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.markdown-render-zone {
+    color: #ffe4e6;
+    font-size: 1.1rem;
+    line-height: 1.75;
+}
+
+.markdown-render-zone p {
+    margin-bottom: 1rem;
+}
+
+.markdown-render-zone h3 {
+    font-size: 1.3rem;
+    color: white;
+    margin: 1.5rem 0 0.75rem 0;
+    border-bottom: 1px solid rgba(236, 72, 153, 0.08);
+    padding-bottom: 0.25rem;
+}
+
+.markdown-render-zone ul {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+    list-style-type: square;
+}
+
+.markdown-render-zone li {
+    margin-bottom: 0.4rem;
+}
+
+.markdown-render-zone strong {
+    color: var(--text-muted);
+}
+
+.source-accordion-trigger {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    color: #fbcfe8;
+}
+
+.source-accordion-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.trigger-title { font-size: 1.05rem; }
+.trigger-icon {
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
+    color: var(--text-secondary);
+}
+
+details[open] .trigger-icon {
+    transform: rotate(180deg);
+}
+
+.source-accordion-content {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(236, 72, 153, 0.1);
+}
+
+.citation-card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.citation-mini-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(11, 5, 9, 0.3);
+    border: 1px solid rgba(236, 72, 153, 0.1);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+}
+
+.cite-number {
+    background: rgba(236, 72, 153, 0.15);
+    color: var(--text-secondary);
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.cite-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.cite-title {
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 500;
+}
+
+.cite-status {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+    .workspace-layout { grid-template-columns: 1fr; }
+    .workspace-sidebar { display: none; }
+}
+/* Append these rules cleanly to the bottom of your style.css file */
+
+/* Relative Context for Sticker Overlays */
+.search-box-container {
+    position: relative; /* Allows micro-stickers to position accurately around bounds */
+}
+
+/* Base Sticker Profile */
+.search-sticker {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    pointer-events: none;
+    z-index: 10;
+    animation: pulseScale 4s infinite alternate ease-in-out;
+}
+
+/* Top-Left Ribbon Sticker Alignment */
+.sticker-top-left {
+    top: -12px;
+    left: 12px;
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: rotate(-2deg);
+}
+
+/* Bottom-Right Research Sticker Alignment */
+
+
+
+/* Keep the padding tidy inside input fields so text doesn't collision overlap */
+textarea {
+    padding-top: 0.85rem;
+}
+/* Append these rules cleanly to the bottom of your style.css file */
+
+/* Ribbon Sticker Adjustments for Emoji */
+.sticker-top-left-ribbon {
+    position: absolute;
+    top: -14px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Isolate the emoji and set its rotational anchor point to its top-center */
+.swinging-emoji {
+    font-size: 1.1rem;
+    display: inline-block;
+    transform-origin: top center;
+    animation: constantSwing 2.5s infinite ease-in-out;
+}
+
+/* Smooth, perpetual rocking animation timeline */
+@keyframes constantSwing {
+    0% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(-10deg);
+    }
+}
+
+.sticker-bottom-right {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    font-size: 45px;
+    z-index: 999;
+}
+.pure-swinging-ribbon {
+    font-size: 30px;
+    display: inline-block;
+    transform-origin: top center;
+    animation: ribbonSwing 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes ribbonSwing {
+    0%   { transform: rotate(-2deg); }
+    50%  { transform: rotate(2deg); }
+    100% { transform: rotate(-2deg); }
+}

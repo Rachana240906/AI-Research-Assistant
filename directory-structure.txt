@@ -1,0 +1,12 @@
+ai-research-assistant/
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   └── services/
+│   │       ├── __init__.py
+│   │       └── agent.py
+│   └── requirements.txt
+├── frontend/
+├── .env
+└── .env.example
